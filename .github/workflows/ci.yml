@@ -84,6 +84,7 @@ jobs:
 
       - name: 작업 정의 업데이트
         run: |
+          sed -i "s/\${AWS_ACCOUNT_ID}/${{ secrets.AWS_ACCOUNT_ID }}/g" ecs-task-def.json
           aws ecs register-task-definition \
           --cli-input-json file://ecs-task-def.json
 
@@ -103,6 +104,6 @@ jobs:
       - name: ECS 배포 상태 확인
         run: |
           aws ecs describe-services \
-            --cluster myapp-cluster \
-            --services myapp-service \
+            --cluster ${{ secrets.ECS_CLUSTER }} \
+            --services ${{ secrets.ECS_SERVICE }} \
             --query "services[0].deployments"
