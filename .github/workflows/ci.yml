@@ -85,6 +85,8 @@ jobs:
       - name: 작업 정의 업데이트
         run: |
           sed -i "s/\${AWS_ACCOUNT_ID}/${{ secrets.AWS_ACCOUNT_ID }}/g" ecs-task-def.json
+          sed -i "s/\${AWS_REGION}/${{ secrets.AWS_REGION }}/g" ecs-task-def.json
+          sed -i "s/\${IMAGE_TAG}/$IMAGE_TAG/g" ecs-task-def.json
           aws ecs register-task-definition \
           --cli-input-json file://ecs-task-def.json
 
