@@ -84,7 +84,7 @@ jobs:
 
       - name: 작업 정의 업데이트
         run: |
-          aws ecs register-task-definition \\
+          aws ecs register-task-definition \
           --cli-input-json file://ecs-task-def.json
 
       - name: ECS 서비스 업데이트
